@@ -72,3 +72,10 @@ def test_delete_task():
     task = manager.add("Delete me")
     manager.delete(task["id"])
     assert manager.list_tasks() == []
+
+
+def test_delete_unknown_task():
+    manager=TaskManager()
+    manager.add("Existing task")
+    with pytest.raises(ValueError, match="Task not found"):
+        manager.delete(99)
